@@ -7,12 +7,15 @@ import {
 } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
-import ProtectedRoute from "./routes/ProtectedRoutes";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import DashboardLayout from "./components/layout/DashboardLayout";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
-const DashboardPage = () => <h2>Sweety Dashboard – Coming Soon</h2>;
+const ReadingsPage = () => <h2>Glucose Readings – Coming Soon</h2>;
+const ReportsPage = () => <h2>Glucose Reports – Coming Soon</h2>;
 
 function App() {
     return (
@@ -23,21 +26,15 @@ function App() {
                     <Route path="/register" element={<RegisterPage />} />
 
                     <Route element={<ProtectedRoute />}>
-                        <Route
-                            path="/dashboard"
-                            element={<DashboardPage />}
-                        />
+                        <Route element={<DashboardLayout />}>
+                            <Route path="/dashboard" element={<DashboardPage />} />
+                            <Route path="/readings" element={<ReadingsPage />} />
+                            <Route path="/reports" element={<ReportsPage />} />
+                        </Route>
                     </Route>
 
-                    <Route
-                        path="/"
-                        element={<Navigate to="/dashboard" replace />}
-                    />
-
-                    <Route
-                        path="*"
-                        element={<Navigate to="/dashboard" replace />}
-                    />
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                    <Route path="*" element={<Navigate to="/dashboard" replace />} />
                 </Routes>
             </AuthProvider>
         </BrowserRouter>
