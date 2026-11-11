@@ -7,15 +7,14 @@ import {
 } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
-import ProtectedRoute from "./routes/ProtectedRoute";
+import ProtectedRoute from "./routes/ProtectedRoutes";
 
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import DashboardPage from "./pages/dashboard/DashboardPage";
-
-const ReadingsPage = () => <h2>Glucose Readings – Coming Soon</h2>;
-const ReportsPage = () => <h2>Glucose Reports – Coming Soon</h2>;
+import ReadingsPage from "./pages/readings/ReadingsPage";
+import ReportsPage from "./pages/reports/ReportsPage";
 
 function App() {
     return (
