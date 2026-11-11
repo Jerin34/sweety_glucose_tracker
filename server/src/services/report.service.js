@@ -1,5 +1,5 @@
 
-const pool = require("../config/db");
+const {pool} = require("../config/db");
 
 // Get today's date in the configured application timezone.
 const getToday = () => {

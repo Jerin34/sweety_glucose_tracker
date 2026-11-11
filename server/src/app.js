@@ -13,23 +13,18 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use("/api/auth", authroutes);
-app.use("/api/readings", readingRoutes);
-app.use("api/reports", reportRoutes);
+
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,
         message: "Sweety API is running"
     });
 });
-const authenticate = require("./middleware/auth.middleware");
 
-app.get("/api/auth/me", authenticate, (req, res) => {
-    res.status(200).json({
-        success: true,
-        userId: req.user.id
-    });
-});
+app.use("/api/auth", authroutes);
+app.use("/api/readings", readingRoutes);
+app.use("/api/reports", reportRoutes);
+
 
 
 module.exports = app;

@@ -7,7 +7,7 @@ const {
     getDaily,
     getMonthToDate,
     getPreviousMonth
-} = require("../controllers/report.controller");
+} = require("../controllers/reports.controller");
 
 const router = express.Router();
 
