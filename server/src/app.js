@@ -5,6 +5,7 @@ const app = express();
 
 const authroutes = require("./routes/auth.routes");
 const readingRoutes = require("./routes/reading.routes");
+const reportRoutes = require("./routes/reports.routes");
 
 
 app.use(cors({
@@ -14,6 +15,7 @@ app.use(cors({
 app.use(express.json());
 app.use("/api/auth", authroutes);
 app.use("/api/readings", readingRoutes);
+app.use("api/reports", reportRoutes);
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,
