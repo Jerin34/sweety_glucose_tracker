@@ -8,18 +8,24 @@ const createReading = async (userId, reading) => {
         `INSERT INTO readings
          (user_id, reading_date, time_slot, glucose_value)
          VALUES ($1, $2, $3, $4)
-         RETURNING *`,
+         RETURNING
+            id,
+            user_id,
+            reading_date::text AS reading_date,
+            time_slot,
+            glucose_value,
+            created_at,
+            updated_at`,
         [userId, reading_date, time_slot, glucose_value]
     );
 
     return result.rows[0];
 };
-
 // GET all readings
 const getReadings = async (userId) => {
     const result = await pool.query(
-        `SELECT id, reading_date, time_slot, glucose_value,
-                created_at, updated_at
+        `SELECT id, reading_date::text AS reading_date,
+       time_slot, glucose_value, created_at, updated_at
          FROM readings
          WHERE user_id = $1
          ORDER BY reading_date DESC, created_at DESC`,
@@ -32,8 +38,9 @@ const getReadings = async (userId) => {
 // GET single reading
 const getReadingById = async (userId, readingId) => {
     const result = await pool.query(
-        `SELECT *
-         FROM readings
+        `SELECT id, user_id, reading_date::text AS reading_date,
+       time_slot, glucose_value, created_at, updated_at
+FROM readings
          WHERE id = $1 AND user_id = $2`,
         [readingId, userId]
     );
@@ -52,7 +59,10 @@ const updateReading = async (userId, readingId, reading) => {
              glucose_value = $3,
              updated_at = CURRENT_TIMESTAMP
          WHERE id = $4 AND user_id = $5
-         RETURNING *`,
+         RETURNING 
+          id, user_id, reading_date::text AS reading_date,
+          time_slot, glucose_value, created_at, updated_at
+         `,
         [
             reading_date,
             time_slot,

@@ -1,4 +1,12 @@
+const path = require("path");
+
+require("dotenv").config({
+    path: path.resolve(__dirname, "../../.env")
+});
+
 const { Pool } = require("pg");
+
+console.log("DB password type:", typeof process.env.DB_PASSWORD);
 
 const pool = new Pool({
     host: process.env.DB_HOST,
@@ -14,7 +22,6 @@ const connectDb = async () => {
 
         console.log("PostgreSQL connected successfully!");
         console.log("Database time:", result.rows[0].current_time);
-
     } catch (error) {
         console.error("Database connection failed:", error.message);
         throw error;

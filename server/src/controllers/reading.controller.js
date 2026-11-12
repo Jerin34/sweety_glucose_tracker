@@ -26,12 +26,13 @@ const createReading = async (req, res) => {
         });
 
     } catch (error) {
+        
         if (error.code === "23505") {
-            return res.status(409).json({
-                success: false,
-                message: getDuplicateMessage(error)
-            });
-        }
+    return res.status(409).json({
+        success: false,
+        message: "A reading already exists for this date and time slot."
+    });
+}
 
         console.error("Create reading error:", error);
 
@@ -117,11 +118,11 @@ const updateReading = async (req, res) => {
 
     } catch (error) {
         if (error.code === "23505") {
-            return res.status(409).json({
-                success: false,
-                message: getDuplicateMessage(error)
-            });
-        }
+    return res.status(409).json({
+        success: false,
+        message: "A reading already exists for this date and time slot."
+    });
+}
 
         console.error("Update reading error:", error);
 
