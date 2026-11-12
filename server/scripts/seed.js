@@ -11,12 +11,7 @@ const seedDatabase = async () => {
         const name = "Demo User";
         const email = process.env.SEED_EMAIL;
         const password = process.env.SEED_PASSWORD;
-       console.log({
-    DB_HOST: !!process.env.DB_HOST,
-    DB_USER: !!process.env.DB_USER,
-    DB_PASSWORD: typeof process.env.DB_PASSWORD,
-    DB_NAME: !!process.env.DB_NAME
-});
+    
         if (!email || !password) {
             throw new Error(
                 "Please configure SEED_EMAIL and SEED_PASSWORD in server/.env"
